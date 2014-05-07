@@ -1,0 +1,69 @@
+CO1
+操作：
+	viewRecords()
+交叉引用：
+	用例：Viewing
+前置条件：
+	正在运行中的LetsGo软件。
+后置条件：
+	创建了Viewer的实例。
+	Viewer被关联到HealthApp。
+	HealthApp显示内容被更新为RecordList内容。
+	
+CO2
+操作：
+	makePlan(Time:time, Distance:distance)
+交叉引用：
+	用例：Planning
+前置条件：
+	正在运行的LetsGo软件。
+后置条件：
+	创建了Planner类的实例。
+	Planner被关联到了HealthApp。
+	RecordList增加了元素record[i]。
+	record[i]的time属性被赋值位time。
+	record[i]的distance属性被赋值位distance。
+	
+CO3
+操作：
+	addRecord(Time:time, Distance:distance)
+交叉引用：
+	用例：Planning
+前置条件：
+	正在运行的Planner类。
+后置条件：
+	Planner被关联到了RecordList。
+	RecordList增加了元素record[i]。
+	record[i]的time属性被赋值位time。
+	record[i]的distance属性被赋值位distance。
+	
+CO4
+操作：
+	startRecord()
+交叉引用：
+	用例：Recording
+前置条件：
+	正在运行的LetsGo软件。
+后置条件：
+	创建了Recorder类实例。
+	Recorder被关联到了HealthApp类。
+	Recorder类中distance0记录了本次跑步开始时刻的GPSinfo
+	Recorder类中time0记录了本次跑步开始时刻的Timeinfo。
+	HealthApp中显示内容被更新为开始时刻的GPSinfo与Timeinfo。
+	
+CO5
+操作：
+	stopRecord()
+交叉引用：
+	用例：Recording
+前置条件：
+	正在运行的LetsGo软件。
+	已经运行的startRecord()
+后置条件：
+	Recorder类中distance1记录了本次跑步结束时刻的GPSinfo
+	Recorder类中time1记录了本次跑步结束时刻的Timeinfo。
+	RecordList类中增加了新条目record[i]
+	record[i]的time属性被赋值为time1-time0。
+	record[i]的distance属性被赋值为distance1-distance0。
+	HealthApp中显示内容被更新为开始与结束时刻的GPSinfo与Timeinfo。
+	
