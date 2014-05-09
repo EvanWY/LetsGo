@@ -31,4 +31,6 @@ System Analysis and Design course project, a health control software on Android.
 
 8、添加了补充说明
 
+9、尝试进行github同步
+
 
