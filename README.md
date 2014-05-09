@@ -27,4 +27,8 @@ System Analysis and Design course project, a health control software on Android.
 
 6、建立了Android源代码项目
 
+7、添加了用例模型以及用例图
+
+8、添加了补充说明
+
 
