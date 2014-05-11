@@ -1,0 +1,114 @@
+\documentclass [a4paper,11pt]{article}
+\usepackage{booktabs}
+\usepackage{zhfontcfg}
+\usepackage{multirow}
+\usepackage[margin=1in]{geometry}
+
+
+\title{操作契约}
+\date{\today}
+\author{LetsGo安卓应用开发小组}
+
+\begin{document}
+	
+\maketitle
+\section*{修订历史}
+
+\begin{table}[!hbp]
+\centering
+
+\begin{tabular*}{\textwidth}{c|c|c|c}
+\hline
+\rule{0pt}{0.8cm}
+版~本 & 日~期 & 描~述 & 作~者\\
+\hline
+\rule{0pt}{0.6cm}
+初始草案 & 2014年5月10日 & 第一个草案。主要进行细化以及精化。 & 王旸\\
+\hline
+\rule{0pt}{0.6cm}
+修改草案 & 2014年5月12日 & 对草案进行小范围修改 & 王旸\\ 
+\hline
+\rule{0pt}{0.6cm}
+ &  &  & \\
+\hline
+\end{tabular*}
+\end{table}
+
+
+\begin{table}[!hbp]
+\section*{契约CO1}
+\centering
+\begin{tabular*}{\textwidth}{p{0.15\textwidth}p{0.75\textwidth}}
+\textbf{操作：} & viewRecords()\\
+\textbf{交叉引用：} & 用例：Viewing\\
+\textbf{前置条件：} & 正在运行中的LetsGo软件。\\
+\textbf{后置条件：} & 创建了Viewer的实例。\\
+				  & Viewer被关联到HealthApp。\\
+				  & HealthApp显示内容被更新为RecordList内容。\\
+\end{tabular*}
+\end{table}
+
+\begin{table}[!hbp]
+\section*{契约CO2}
+\centering
+\begin{tabular*}{\textwidth}{p{0.15\textwidth}p{0.75\textwidth}}
+\textbf{操作：} & makePlan(Time:time, Distance:distance)\\
+\textbf{交叉引用：} & 用例：Planning\\
+\textbf{前置条件：} & 正在运行的LetsGo软件。\\
+\textbf{后置条件：} & 创建了Planner类的实例。\\
+				  & Planner被关联到了HealthApp。\\
+				  & RecordList增加了元素record[i]。\\
+	&record[i]的time属性被赋值位time。\\
+	&record[i]的distance属性被赋值位distance。\\
+\end{tabular*}
+\end{table}
+
+\begin{table}[!hbp]
+\section*{契约CO3}
+\centering
+\begin{tabular*}{\textwidth}{p{0.15\textwidth}p{0.75\textwidth}}
+\textbf{操作：} & addRecord(Time:time, Distance:distance)\\
+\textbf{交叉引用：} & 用例：Planning\\
+\textbf{前置条件：} & 正在运行的Planner类。\\
+\textbf{后置条件：} &	Planner被关联到了RecordList。\\
+	&RecordList增加了元素record[i]。\\
+	&record[i]的time属性被赋值位time。\\
+	&record[i]的distance属性被赋值位distance。\\
+\end{tabular*}
+\end{table}
+
+\begin{table}[!hbp]
+\section*{契约CO4}
+\centering
+\begin{tabular*}{\textwidth}{p{0.15\textwidth}p{0.75\textwidth}}
+\textbf{操作：} & startRecord()\\
+\textbf{交叉引用：} & 用例：Recording\\
+\textbf{前置条件：} & 正在运行的LetsGo软件。\\
+\textbf{后置条件：} &创建了Recorder类实例。\\
+	&Recorder被关联到了HealthApp类。\\
+	&Recorder类中distance0记录了本次跑步开始时刻的GPSinfo\\
+	&Recorder类中time0记录了本次跑步开始时刻的Timeinfo。\\
+	&HealthApp中显示内容被更新为开始时刻的GPSinfo与Timeinfo。\\
+\end{tabular*}
+\end{table}
+
+\begin{table}[!hbp]
+\section*{契约CO5}
+\centering
+\begin{tabular*}{\textwidth}{p{0.15\textwidth}p{0.75\textwidth}}
+\textbf{操作：} & stopRecord()\\
+\textbf{交叉引用：} & 用例：Recording\\
+\textbf{前置条件：} & 正在运行的LetsGo软件。\\
+	&已经运行的startRecord()\\
+\textbf{后置条件：} &Recorder类中distance1记录了本次跑步结束时刻的GPSinfo\\
+	&Recorder类中time1记录了本次跑步结束时刻的Timeinfo。\\
+	&RecordList类中增加了新条目record[i]\\
+	&record[i]的time属性被赋值为time1-time0。\\
+	&record[i]的distance属性被赋值为distance1-distance0。\\
+	&HealthApp中显示内容被更新为开始与结束时刻的GPSinfo与Timeinfo。\\
+\end{tabular*}
+\end{table}
+	
+
+  
+\end{document}

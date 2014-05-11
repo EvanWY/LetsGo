@@ -1,0 +1,66 @@
+\documentclass [a4paper,11pt]{article}
+\usepackage{booktabs}
+\usepackage{zhfontcfg}
+\usepackage{multirow}
+\usepackage[margin=1in]{geometry}
+
+
+\title{业务规则}
+\date{\today}
+\author{LetsGo安卓应用开发小组}
+
+\begin{document}
+	
+\maketitle
+\section*{修订历史}
+
+\begin{table}[!hbp]
+\centering
+
+\begin{tabular*}{0.95\textwidth}{c|c|c|c}
+\hline
+\rule{0pt}{0.8cm}
+版~本 & 日~期 & 描~述 & 作~者\\
+\hline
+\rule{0pt}{0.6cm}
+初始草案 & 2014年5月11日 & 第一个草案。主要进行细化以及精化。 & 王枫荻 \\
+\hline
+\rule{0pt}{0.6cm}
+改版初始草案 & 2014年5月12日 & 对初始草案进行细微修改 & 王旸 \\
+\hline
+\rule{0pt}{0.6cm}
+ &  &  & \\
+\hline
+\end{tabular*}
+
+\end{table}
+
+\section*{规则列表}
+
+\begin{table}[!hbp]
+\centering
+
+\begin{tabular*}{\textwidth}{p{0.1\columnwidth}|p{0.25\columnwidth}|p{0.4\columnwidth}|p{0.15\columnwidth}}
+\hline
+\rule{0pt}{0.8cm}
+ID & 规~则 & 可~变~性 & 来~源\\
+
+\hline
+\rule{0pt}{0.6cm}
+规则1 & 跑步时需要打开软件 & 若用户选择不进行严格模式，那么可以在跑步时关闭软件，但是无法对用户进行真实度认证 & 真实性认证的一般需要\\
+
+\hline
+\rule{0pt}{0.6cm}
+规则2 & 需要保护用户的位置信息，不得到用户许可将不会传播。 & 低 & 法律规定\\
+
+\hline
+\rule{0pt}{0.6cm}
+规则3 & 将能量单位换算为卡路里显示 & 可以在用户的选择下，显示为其他单位制式，并且提供不同单位格式之间转换的公式供用户参考 & 健身软件一般模式\\
+ 
+\hline
+\end{tabular*}
+
+\end{table}
+
+  
+\end{document}
