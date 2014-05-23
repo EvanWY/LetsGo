@@ -44,85 +44,107 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" 
             		android:orientation="vertical" >
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" 
+                        android:layout_weight="1" >
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" >
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/tab2_const_textView1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:layout_weight="1" 
+                            android:text="活动日期" />
 
                         <TextView
-                            android:id="@+id/textView3"
+                            android:id="@+id/tab2_textView1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView" />
+                            android:text="tab2_textView1" />
 
                         <Button
-                            android:id="@+id/button3"
+                            android:id="@+id/tab2_button1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Button" />
+                            android:text="tab2_button1" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content" 
+                        android:layout_weight="1" >
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/tab2_const_textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:layout_weight="1" 
+                            android:text="开始时间" />
 
                         <TextView
-                            android:id="@+id/textView5"
+                            android:id="@+id/tab2_textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:layout_weight="1" 
+                            android:text="tab2_textView2" />
 
                         <Button
-                            android:id="@+id/button4"
+                            android:id="@+id/tab2_button2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Button" />
+                            android:text="tab2_button2" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content" 
+                        android:layout_weight="1" >
 
                         <TextView
-                            android:id="@+id/textView6"
+                            android:id="@+id/tab2_const_textView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:layout_weight="1" 
+                            android:text="结束时间" />
 
                         <TextView
-                            android:id="@+id/textView7"
+                            android:id="@+id/tab2_textView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:layout_weight="1" 
+                            android:text="tab2_textView3" />
 
                         <Button
-                            android:id="@+id/button5"
+                            android:id="@+id/tab2_button3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Button" />
+                            android:text="tab2_button3" />
 
                     </LinearLayout>
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" 
+                        android:layout_weight="3" >
 
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Button" />
+	                    <Button
+	                        android:id="@+id/tab2_button4"
+	                        android:layout_width="wrap_content"
+	                        android:layout_height="wrap_content"
+	                        android:text="tab2_button4" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -133,22 +155,22 @@
             		android:orientation="vertical" >
 
                     <Chronometer
-                        android:id="@+id/chronometer1"
+                        android:id="@+id/tab3_chronometer1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Chronometer" />
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/tab3_textView1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:text="tab3_textView1" />
 
                     <Button
-                        android:id="@+id/button1"
+                        android:id="@+id/tab3_button1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Button" />
+                        android:text="tab3_button1" />
 
                 </LinearLayout>
             </FrameLayout>
