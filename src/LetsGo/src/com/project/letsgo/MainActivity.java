@@ -12,6 +12,8 @@ import android.content.Context;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -21,6 +23,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     
@@ -82,6 +85,18 @@ public class MainActivity extends Activity {
         // list View 1 process
         //String[] str = new String[] { "Android Introduction","Android Setup/Installation","Android Hello World","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Android Layouts/Viewgroups","Android Activity & Lifecycle","Intents in Android"};
         refresh_tab1_listView1();
+        tab1_listView1.setOnItemLongClickListener(new OnItemLongClickListener(){
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                RecordListManager.getInstance().removeRecord(arg2);
+                refresh_tab1_listView1();
+                Toast.makeText(
+                        getApplicationContext(),
+                        "记录已删除", 
+                        Toast.LENGTH_LONG
+                        ).show();
+                return false;
+            }
+        });
         // ListView 1 finish.
         
         
@@ -109,8 +124,8 @@ public class MainActivity extends Activity {
                         myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)
                         ).show();
-                }
-            });
+            }
+        });
         
         tab2_button2.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -142,12 +157,18 @@ public class MainActivity extends Activity {
         
         tab2_button4.setOnClickListener(new OnClickListener(){
             public void onClick(View v) {
-			    RecordListManager.getInstance().addRecord(
-				        tab2_textView1.getText().toString(),
-					    tab2_textView2.getText().toString(),
-						tab2_textView3.getText().toString());
+                RecordListManager.getInstance().addRecord(
+			            tab2_textView1.getText().toString(),
+				        tab2_textView2.getText().toString(),
+					    tab2_textView3.getText().toString());
 			    refresh_tab1_listView1();
-			}
+			    Toast.makeText(
+                        getApplicationContext(),
+                        "记录已添加", 
+                        Toast.LENGTH_LONG
+                        ).show();
+			    tabHost.setCurrentTab(0);
+            }
         });
         // tab2 finish
 
@@ -156,11 +177,11 @@ public class MainActivity extends Activity {
 	private void refresh_tab1_listView1() {
 	    String[] str = RecordListManager.getInstance().getStringArray();
 	    ArrayAdapter<String> lab1_listView1_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, str);
-        
-        tab1_listView1.setAdapter(lab1_listView1_adapter);
+            
+	    tab1_listView1.setAdapter(lab1_listView1_adapter);
 	}
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
 	    // Inflate the menu; this adds items to the action bar if it is present.
 	    getMenuInflater().inflate(R.menu.main, menu);
 	    return true;

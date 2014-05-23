@@ -69,13 +69,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="tab2_textView1" />
+                            android:text="2014/01/01" />
 
                         <Button
                             android:id="@+id/tab2_button1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="tab2_button1" />
+                            android:text="修改" />
 
                     </LinearLayout>
 
@@ -96,13 +96,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" 
-                            android:text="tab2_textView2" />
+                            android:text="20:00" />
 
                         <Button
                             android:id="@+id/tab2_button2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="tab2_button2" />
+                            android:text="修改" />
 
                     </LinearLayout>
 
@@ -123,13 +123,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" 
-                            android:text="tab2_textView3" />
+                            android:text="20:45" />
 
                         <Button
                             android:id="@+id/tab2_button3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="tab2_button3" />
+                            android:text="修改" />
 
                     </LinearLayout>
                     
@@ -137,12 +137,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" 
                         android:layout_weight="3" >
-
-	                    <Button
-	                        android:id="@+id/tab2_button4"
-	                        android:layout_width="wrap_content"
-	                        android:layout_height="wrap_content"
-	                        android:text="tab2_button4" />
+	                    <RelativeLayout
+	                        android:layout_width="match_parent"
+	                        android:layout_height="match_parent">
+		                    <Button
+		                        android:id="@+id/tab2_button4"
+		                        android:layout_width="wrap_content"
+		                        android:layout_height="wrap_content"
+		                        android:layout_centerInParent="true"
+		                        android:text="添加" />
+                        </RelativeLayout>
 
                     </LinearLayout>
 
