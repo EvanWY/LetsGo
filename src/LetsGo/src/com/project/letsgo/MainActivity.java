@@ -23,29 +23,28 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class MainActivity extends Activity {
+    
+    TabHost tabHost;
 	
-	TabHost tabHost;
-	
-	ListView tab1_listView1;
-	
-	TextView tab2_textView1;
-	TextView tab2_textView2;
-	TextView tab2_textView3;	
-	Button tab2_button1;
-	Button tab2_button2;
-	Button tab2_button3;
-	Button tab2_button4;
+    ListView tab1_listView1;
+    
+    TextView tab2_textView1;
+    TextView tab2_textView2;
+    TextView tab2_textView3;	
+    Button tab2_button1;
+    Button tab2_button2;
+    Button tab2_button3;
+    Button tab2_button4;    
+    
+    Chronometer tab3_chronometer1;
+    TextView tab3_textView1;
+    Button tab3_button1;
+    
+    Context context = this;
 
-	Chronometer tab3_chronometer1;
-	TextView tab3_textView1;
-	Button tab3_button1;
-	
-	Context context = this;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         tabHost=(TabHost)findViewById(R.id.tabHost);
         tab1_listView1 = (ListView)findViewById(R.id.tab1_listView1);
@@ -60,8 +59,7 @@ public class MainActivity extends Activity {
         tab3_textView1 = (TextView)findViewById(R.id.tab3_textView1);
         tab3_button1 = (Button)findViewById(R.id.tab3_button1);
         
-		
-		// Setting up Tabs UI.	
+        // Setting up Tabs UI.	
         tabHost.setup();
       
         TabSpec spec1=tabHost.newTabSpec("tab1");
@@ -90,29 +88,29 @@ public class MainActivity extends Activity {
         // setting up tab2
         final Calendar myCalendar = Calendar.getInstance();
 
-		final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-		    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-		        myCalendar.set(Calendar.YEAR, year);
-		        myCalendar.set(Calendar.MONTH, monthOfYear);
-		        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-			    String myFormat = "yyyy/MM/dd";
-			    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CHINA);
-			    tab2_textView1.setText(sdf.format(myCalendar.getTime()));
-			    System.out.print(myCalendar.getTime());
-		    }
-		};
+                String myFormat = "yyyy/MM/dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CHINA);
+                tab2_textView1.setText(sdf.format(myCalendar.getTime()));
+                System.out.print(myCalendar.getTime());
+                }
+        };
         
         tab2_button1.setOnClickListener(new OnClickListener() {
-	        public void onClick(View v) {
-	            new DatePickerDialog(MainActivity.this,
-	            					date,
-	            					myCalendar.get(Calendar.YEAR),
-	            					myCalendar.get(Calendar.MONTH),
-	            					myCalendar.get(Calendar.DAY_OF_MONTH)
-	            					).show();
-	        }
-	    });
+            public void onClick(View v) {
+                new DatePickerDialog(MainActivity.this,
+                        date,
+                        myCalendar.get(Calendar.YEAR),
+                        myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)
+                        ).show();
+                }
+            });
         
         tab2_button2.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -124,7 +122,7 @@ public class MainActivity extends Activity {
                         tab2_textView2.setText( selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, true).show();
-
+                
             }
         });
         
@@ -143,29 +141,29 @@ public class MainActivity extends Activity {
         });
         
         tab2_button4.setOnClickListener(new OnClickListener(){
-			public void onClick(View v) {
-				RecordListManager.getInstance().addRecord(
-						tab2_textView1.getText().toString(),
-						tab2_textView2.getText().toString(),
+            public void onClick(View v) {
+			    RecordListManager.getInstance().addRecord(
+				        tab2_textView1.getText().toString(),
+					    tab2_textView2.getText().toString(),
 						tab2_textView3.getText().toString());
-				refresh_tab1_listView1();
+			    refresh_tab1_listView1();
 			}
         });
         // tab2 finish
-        
+
         
 	}
 	private void refresh_tab1_listView1() {
-		String[] str = RecordListManager.getInstance().getStringArray();
-        ArrayAdapter<String> lab1_listView1_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, str);
+	    String[] str = RecordListManager.getInstance().getStringArray();
+	    ArrayAdapter<String> lab1_listView1_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, str);
         
         tab1_listView1.setAdapter(lab1_listView1_adapter);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	    // Inflate the menu; this adds items to the action bar if it is present.
+	    getMenuInflater().inflate(R.menu.main, menu);
+	    return true;
 	}
 
 }
