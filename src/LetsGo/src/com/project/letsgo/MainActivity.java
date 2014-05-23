@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -83,10 +82,8 @@ public class MainActivity extends Activity {
         
         
         // list View 1 process
-        String[] str = new String[] { "Android Introduction","Android Setup/Installation","Android Hello World","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Android Layouts/Viewgroups","Android Activity & Lifecycle","Intents in Android"};
-        ArrayAdapter<String> lab1_listView1_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, str);
-        
-        tab1_listView1.setAdapter(lab1_listView1_adapter);
+        //String[] str = new String[] { "Android Introduction","Android Setup/Installation","Android Hello World","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Intents in Android","Android Layouts/Viewgroups","Android Activity & Lifecycle","Intents in Android"};
+        refresh_tab1_listView1();
         // ListView 1 finish.
         
         
@@ -144,9 +141,25 @@ public class MainActivity extends Activity {
 
             }
         });
+        
+        tab2_button4.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				RecordListManager.getInstance().addRecord(
+						tab2_textView1.getText().toString(),
+						tab2_textView2.getText().toString(),
+						tab2_textView3.getText().toString());
+				refresh_tab1_listView1();
+			}
+        });
         // tab2 finish
         
         
+	}
+	private void refresh_tab1_listView1() {
+		String[] str = RecordListManager.getInstance().getStringArray();
+        ArrayAdapter<String> lab1_listView1_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, str);
+        
+        tab1_listView1.setAdapter(lab1_listView1_adapter);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
