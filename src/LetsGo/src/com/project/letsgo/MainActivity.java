@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
         refresh_tab1_listView1();
         tab1_listView1.setOnItemLongClickListener(new OnItemLongClickListener(){
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                RecordListManager.getInstance().removeRecord(arg2);
+                RecordListManager.getInstance(context).removeRecord(arg2);
                 refresh_tab1_listView1();
                 Toast.makeText(
                         getApplicationContext(),
@@ -157,7 +157,7 @@ public class MainActivity extends Activity {
         
         tab2_button4.setOnClickListener(new OnClickListener(){
             public void onClick(View v) {
-                RecordListManager.getInstance().addRecord(
+                RecordListManager.getInstance(context).addRecord(
 			            tab2_textView1.getText().toString(),
 				        tab2_textView2.getText().toString(),
 					    tab2_textView3.getText().toString());
@@ -175,7 +175,7 @@ public class MainActivity extends Activity {
         
 	}
 	private void refresh_tab1_listView1() {
-	    String[] str = RecordListManager.getInstance().getStringArray();
+	    String[] str = RecordListManager.getInstance(context).getStringArray();
 	    ArrayAdapter<String> lab1_listView1_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, str);
             
 	    tab1_listView1.setAdapter(lab1_listView1_adapter);

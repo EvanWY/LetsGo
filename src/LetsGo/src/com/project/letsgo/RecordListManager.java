@@ -1,27 +1,33 @@
 package com.project.letsgo;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import android.content.Context;
 
 public class RecordListManager {
 	
 	private static RecordListManager instance = null;
+	private DBAdapter myHelper;
+	private Context context;
 	
-	public static RecordListManager getInstance() {
+	public static RecordListManager getInstance(Context c) {
 		if (instance == null)
-			instance = new RecordListManager();
+			instance = new RecordListManager(c);
 		return instance;
 	}
 	
-	private List<Record> recordList = new ArrayList<Record>();
+	private ArrayList<Record> recordList;
 	
-	private RecordListManager() {
-		// load from Database ...
-		recordList.add(new Record("2014/05/02", "22:01", "22:05"));
-		recordList.add(new Record("2014/05/03", "11:04", "12:08"));
+	private RecordListManager(Context c) {
+		//load from database...
+		context = c;
+		myHelper = new DBAdapter(context);
+		recordList = myHelper.convertToRecord(myHelper.getCursor());
 	}
 	
 	public String[] getStringArray() {
+		if (recordList == null)
+			return null;
 		String[] strList = new String[recordList.size()];
 		for (int i=0; i!=recordList.size(); i++) {
 			strList[i] = recordList.get(i).getDate() + " (" + recordList.get(i).getStartTime() + " - " + recordList.get(i).getEndTime() + ")"; 
