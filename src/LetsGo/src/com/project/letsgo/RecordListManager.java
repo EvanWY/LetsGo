@@ -16,7 +16,7 @@ public class RecordListManager {
 		return instance;
 	}
 	
-	private ArrayList<Record> recordList;
+	private ArrayList<Record> recordList = new ArrayList<Record>();
 	
 	private RecordListManager(Context c) {
 		//load from database...
@@ -36,11 +36,17 @@ public class RecordListManager {
 	}
 	
 	public void addRecord(String date, String stime, String etime) {
-		recordList.add(0, new Record(date, stime, etime));
+		Record newRecord = new Record(date, stime, etime);
+		long thisId = myHelper.insert(newRecord);
+		newRecord.setID(thisId);
+		if (thisId != -1)
+			recordList.add(0, newRecord);
 		// update data base!
 	}
 	
 	public Record removeRecord(int index) {
+		long thisId = recordList.get(index).getID();
+		myHelper.deleteOneData(thisId);
 		return recordList.remove(index);
 		// update data base too!
 	}

@@ -43,11 +43,12 @@ public class MainActivity extends Activity {
     TextView tab3_textView1;
     Button tab3_button1;
     
-    Context context = this;
+    Context context;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
 
         tabHost=(TabHost)findViewById(R.id.tabHost);
         tab1_listView1 = (ListView)findViewById(R.id.tab1_listView1);
@@ -176,6 +177,8 @@ public class MainActivity extends Activity {
 	}
 	private void refresh_tab1_listView1() {
 	    String[] str = RecordListManager.getInstance(context).getStringArray();
+	    if (str == null)
+	    	str = new String[]{};
 	    ArrayAdapter<String> lab1_listView1_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, str);
             
 	    tab1_listView1.setAdapter(lab1_listView1_adapter);
