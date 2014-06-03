@@ -5,7 +5,7 @@ public class Record {
 	public static final int SUCCESS = 1;
 	public static final int FAIL = 2;
 	
-	private int id;
+	private long id;
 	private int state; // 0 for not complete; 1 for success; 2 for fail
 	private String date;
 	private String start_time;
@@ -29,7 +29,7 @@ public class Record {
 		end_time = e;
 	}
 	
-	public int getID(){
+	public long getID(){
 		return id;
 	}
 	
@@ -49,7 +49,7 @@ public class Record {
 		return end_time;
 	}
 	
-	public void setID(int i){
+	public void setID(long i){
 		id = i;
 	}
 	

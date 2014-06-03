@@ -71,7 +71,7 @@ public class DBAdapter extends SQLiteOpenHelper{
 						);
 	}
 	
-	public long deleteOneData(int id)
+	public int deleteOneData(long id)
 	{
 		SQLiteDatabase db = getWritableDatabase();
 		return db.delete(
@@ -81,7 +81,7 @@ public class DBAdapter extends SQLiteOpenHelper{
 						);
 	}
 	
-	public long updateOneData(int id, Record record)
+	public int updateOneData(long id, Record record)
 	{
 		SQLiteDatabase db = getWritableDatabase();
 		return db.update(
