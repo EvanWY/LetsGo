@@ -17,6 +17,7 @@ public class DBAdapter extends SQLiteOpenHelper{
 	public static final String KEY_DATE = "date";
 	public static final String KEY_START_TIME = "startTime";
 	public static final String KEY_END_TIME = "endTime";
+    public static final String KEY_DISTANCE = "distance";
 	
 
 	public DBAdapter(Context context) {
@@ -32,7 +33,8 @@ public class DBAdapter extends SQLiteOpenHelper{
 									+ " "+KEY_STATE+" integer,"
 									+ " "+KEY_DATE+" TEXT,"
 									+ " "+KEY_START_TIME+" TEXT,"
-									+ " "+KEY_END_TIME+" TEXT);";
+									+ " "+KEY_END_TIME+" TEXT,"
+									+ " "+KEY_DISTANCE+" integer);";
 		db.execSQL(SQL_CREATE_TABLE);
 	}
 
@@ -48,6 +50,7 @@ public class DBAdapter extends SQLiteOpenHelper{
 		values.put(KEY_DATE, record.getDate());
 		values.put(KEY_START_TIME, record.getStartTime());
 		values.put(KEY_END_TIME, record.getEndTime());
+        values.put(KEY_DISTANCE, record.getDistance());
 		return values;
 	}
 	
@@ -58,6 +61,7 @@ public class DBAdapter extends SQLiteOpenHelper{
 		record.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
 		record.setStartTime(cursor.getString(cursor.getColumnIndex(KEY_START_TIME)));
 		record.setEndTime(cursor.getString(cursor.getColumnIndex(KEY_END_TIME)));
+        record.setDistance(cursor.getInt(cursor.getColumnIndex(KEY_DISTANCE)));
 		return record;
 	}
 	
@@ -100,7 +104,8 @@ public class DBAdapter extends SQLiteOpenHelper{
 			return null;
 		}
 		ArrayList<Record> records = new ArrayList<Record>();
-		for (int i = 0; i < resultCounts; i++)
+		//for (int i = 0; i < resultCounts; i++)
+		for (int i = resultCounts - 1; i >= 0; i--)
 		{
 			records.add( valuesToRecord(new Record(), cursor) );
 			cursor.moveToNext();

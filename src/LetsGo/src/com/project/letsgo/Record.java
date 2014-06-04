@@ -10,6 +10,7 @@ public class Record {
 	private String date;
 	private String start_time;
 	private String end_time;
+	private int distance;
 	
 	public Record()
 	{
@@ -18,15 +19,17 @@ public class Record {
 		date = "";
 		start_time = "";
 		end_time = "";
+		distance = 0;
 	}
 	
-	public Record(String d, String s, String e)
+	public Record(String d, String s, String e, int dist)
 	{
 		id = -1;
 		state = Record.NOT_COMPLETE;
 		date = d;
 		start_time = s;
 		end_time = e;
+		distance = dist;
 	}
 	
 	public long getID(){
@@ -49,6 +52,10 @@ public class Record {
 		return end_time;
 	}
 	
+	public int getDistance() {
+	    return distance;
+	}
+	
 	public void setID(long i){
 		id = i;
 	}
@@ -68,6 +75,40 @@ public class Record {
 	public void setEndTime(String s){
 		end_time = s;
 	}
+	
+	public void setDistance(int dist) {
+	    distance = dist;
+	}
+	
+	public static int getTimeMapping(String date, String time){
+	    int ans = 0;
+	    
+	    int year = Integer.parseInt(date.substring(0, 4));
+	    int month = Integer.parseInt(date.substring(5, 7));
+	    int day = Integer.parseInt(date.substring(8, 10));
+	    
+	    int colonPos = 0;
+	    while (time.charAt(colonPos)!=':')
+	        colonPos++;
+	    
+	    int hour = Integer.parseInt(time.substring(0, colonPos));
+	    int minute = Integer.parseInt(time.substring(colonPos + 1, time.length()));
+	    
+	    ans += year;
+	    ans *= 12;
+	    ans += month;
+	    ans *= 31;
+	    ans += day;
+	    ans *= 24;
+	    ans += hour;
+	    ans *= 60;
+	    ans += minute;
+	    
+	    System.out.println("time!!!" + year + " " + month + " " + day + " " + hour + " " + minute + " " + ans);
+	    
+	    return ans;
+	}
+	
 	// debug use
 	public void printInfo(){
 		System.out.print("" + state + " " + date + " " + start_time + " " + end_time);
