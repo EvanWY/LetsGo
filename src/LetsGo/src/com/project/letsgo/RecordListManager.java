@@ -66,6 +66,10 @@ public class RecordListManager {
 		// update data base too!
 	}
 	
+	public Record getRecord(int index) {
+        return recordList.get(index);
+    }
+	
 	public void failRecord(int index) {
 	    long thisId = recordList.get(index).getID();
         Record rec = recordList.get(index);
@@ -96,6 +100,9 @@ public class RecordListManager {
         System.out.println("gogogo++ " + currentDate + " " + currentTime);
 	    
 	    for (int i=0; i!=recordList.size(); i++) {
+	        
+	        System.out.println("pp0");
+	        
 	        Record rec = recordList.get(i);
 	        if (rec.getState() == Record.NOT_COMPLETE){
 	            if (Record.getTimeMapping(rec.getDate(), rec.getEndTime())
@@ -103,6 +110,9 @@ public class RecordListManager {
 	                failRecord(i);
 	            }
 	        }
+	        
+
+            System.out.println("pp1");
 	    }
 	}
 	

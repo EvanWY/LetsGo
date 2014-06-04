@@ -98,16 +98,15 @@ public class DBAdapter extends SQLiteOpenHelper{
 	
 	public ArrayList<Record> convertToRecord(Cursor cursor)
 	{
+        ArrayList<Record> records = new ArrayList<Record>();
 		int resultCounts = cursor.getCount();
 		if (resultCounts == 0 || !cursor.moveToFirst())
 		{
-			return null;
+			return records;
 		}
-		ArrayList<Record> records = new ArrayList<Record>();
-		//for (int i = 0; i < resultCounts; i++)
-		for (int i = resultCounts - 1; i >= 0; i--)
+		for (int i = 0; i < resultCounts; i++)
 		{
-			records.add( valuesToRecord(new Record(), cursor) );
+			records.add( 0, valuesToRecord(new Record(), cursor) );
 			cursor.moveToNext();
 		}
 		return records;
