@@ -144,7 +144,7 @@ public class MainActivity extends Activity {
                             Toast.LENGTH_LONG
                             ).show();
                 }
-                else if (rec.getState() == Record.FAIL){
+                else if (rec.getState() == Record.FAIL || rec.getState() == Record.SUCCESS){
                     Toast.makeText(
                             getApplicationContext(),
                             "该计划已经结束", 
