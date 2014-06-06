@@ -43,10 +43,6 @@ public class MainActivity extends Activity {
     Button tab2_button4;   
     EditText tab2_editText1;
     
-    Chronometer tab3_chronometer1;
-    TextView tab3_textView1;
-    Button tab3_button1;
-    
     Context context;
     
 
@@ -76,9 +72,6 @@ public class MainActivity extends Activity {
         tab2_button3 = (Button)findViewById(R.id.tab2_button3);
         tab2_button4 = (Button)findViewById(R.id.tab2_button4);
         tab2_editText1 = (EditText)findViewById(R.id.tab2_editText1);
-        tab3_chronometer1 = (Chronometer)findViewById(R.id.tab3_chronometer1);
-        tab3_textView1 = (TextView)findViewById(R.id.tab3_textView1);
-        tab3_button1 = (Button)findViewById(R.id.tab3_button1);
         
 
         System.out.println("p0");
@@ -95,11 +88,6 @@ public class MainActivity extends Activity {
         spec2.setContent(R.id.tab2);
         spec2.setIndicator("添加计划");
         tabHost.addTab(spec2);
-      
-        TabSpec spec3=tabHost.newTabSpec("tab3");
-        spec3.setContent(R.id.tab3);
-        spec3.setIndicator("开始记录");
-        tabHost.addTab(spec3);
         // End of Tabs UI setting up.
 
         System.out.println("p1");
@@ -233,18 +221,29 @@ public class MainActivity extends Activity {
         
         tab2_button4.setOnClickListener(new OnClickListener(){
             public void onClick(View v) {
-                RecordListManager.getInstance(context).addRecord(
-			            tab2_textView1.getText().toString(),
-				        tab2_textView2.getText().toString(),
-					    tab2_textView3.getText().toString(),
-					    Integer.parseInt(tab2_editText1.getText().toString()));
-			    refresh_tab1_listView1();
-			    Toast.makeText(
-                        getApplicationContext(),
-                        "记录已添加", 
-                        Toast.LENGTH_LONG
-                        ).show();
-			    tabHost.setCurrentTab(0);
+                if (!tab2_editText1.getText().toString().equals("")){
+                    System.out.println(tab2_editText1.getText().toString() + "aaaaaaaaaaaaaaaaaaaaaaaaaa");
+                    
+                    RecordListManager.getInstance(context).addRecord(
+    			            tab2_textView1.getText().toString(),
+    				        tab2_textView2.getText().toString(),
+    					    tab2_textView3.getText().toString(),
+    					    Integer.parseInt(tab2_editText1.getText().toString()));
+    			    refresh_tab1_listView1();
+    			    Toast.makeText(
+                            getApplicationContext(),
+                            "记录已添加", 
+                            Toast.LENGTH_LONG
+                            ).show();
+    			    tabHost.setCurrentTab(0);
+                }
+                else{
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "请输入目标距离", 
+                            Toast.LENGTH_LONG
+                            ).show();
+                }
             }
         });
         // tab2 finish

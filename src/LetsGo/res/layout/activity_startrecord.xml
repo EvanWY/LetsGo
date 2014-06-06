@@ -4,34 +4,77 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/act2_textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="N/A" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/act2_textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="N/A" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
 
-    <TextView
-        android:id="@+id/act2_textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="N/A" />
+        <TextView
+            android:id="@+id/act2_textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="N/A" />
 
-    <TextView
-        android:id="@+id/act2_textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="N/A" />
+        <TextView
+            android:id="@+id/act2_textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="N/A" />
 
-    <Button
-        android:id="@+id/act2_button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跑步结束" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/act2_textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="N/A" />
+
+        <TextView
+            android:id="@+id/act2_textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="N/A" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/act2_button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跑步结束" />
+
+        </LinearLayout>
+
+    </LinearLayout>
     
 </LinearLayout>
