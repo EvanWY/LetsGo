@@ -1,0 +1,270 @@
+package com.project.letsgo;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Chronometer;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+    
+    TabHost tabHost;
+	
+    ListView tab1_listView1;
+    
+    TextView tab2_textView1;
+    TextView tab2_textView2;
+    TextView tab2_textView3;	
+    Button tab2_button1;
+    Button tab2_button2;
+    Button tab2_button3;
+    Button tab2_button4;   
+    EditText tab2_editText1;
+    
+    Context context;
+    
+
+    @Override
+    protected void onResume() {
+        refresh_tab1_listView1();
+        System.out.println("RRRResume!!");
+        super.onResume();
+    }
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        context = this;
+        
+        RecordListManager.getInstance(context).updateAllState();
+
+        System.out.println("p-0");
+
+        tabHost=(TabHost)findViewById(R.id.tabHost);
+        tab1_listView1 = (ListView)findViewById(R.id.tab1_listView1);
+        tab2_textView1 = (TextView)findViewById(R.id.tab2_textView1);
+        tab2_textView2 = (TextView)findViewById(R.id.tab2_textView2);
+        tab2_textView3 = (TextView)findViewById(R.id.tab2_textView3);
+        tab2_button1 = (Button)findViewById(R.id.tab2_button1);
+        tab2_button2 = (Button)findViewById(R.id.tab2_button2);
+        tab2_button3 = (Button)findViewById(R.id.tab2_button3);
+        tab2_button4 = (Button)findViewById(R.id.tab2_button4);
+        tab2_editText1 = (EditText)findViewById(R.id.tab2_editText1);
+        
+
+        System.out.println("p0");
+        
+        // Setting up Tabs UI.	
+        tabHost.setup();
+      
+        TabSpec spec1=tabHost.newTabSpec("tab1");
+        spec1.setContent(R.id.tab1);
+        spec1.setIndicator("查看记录");
+        tabHost.addTab(spec1);
+        
+        TabSpec spec2=tabHost.newTabSpec("tab2");
+        spec2.setContent(R.id.tab2);
+        spec2.setIndicator("添加计划");
+        tabHost.addTab(spec2);
+        // End of Tabs UI setting up.
+
+        System.out.println("p1");
+        
+        
+        // list View 1 process
+        refresh_tab1_listView1();
+        
+
+        System.out.println("p2");
+        
+        tab1_listView1.setOnItemLongClickListener(new OnItemLongClickListener(){
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                RecordListManager.getInstance(context).removeRecord(arg2);
+                refresh_tab1_listView1();
+                Toast.makeText(
+                        getApplicationContext(),
+                        "记录已删除", 
+                        Toast.LENGTH_LONG
+                        ).show();
+                return false;
+            }
+        });
+        
+        tab1_listView1.setOnItemClickListener(new OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Record rec = RecordListManager.getInstance(context).getRecord(position);
+                
+                String myFormat = "yyyy/MM/dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CHINA);
+                String currentDate = sdf.format(Calendar.getInstance().getTime());
+                int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+                int minute = Calendar.getInstance().get(Calendar.MINUTE);
+                String currentTime = "" + hour + ":" + minute;
+                
+                if (Record.getTimeMapping(rec.getDate(), rec.getStartTime()) > Record.getTimeMapping(currentDate, currentTime)){
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "未到达该计划开始时间", 
+                            Toast.LENGTH_LONG
+                            ).show();
+                }
+                else if (rec.getState() == Record.FAIL || rec.getState() == Record.SUCCESS){
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "该计划已经结束", 
+                            Toast.LENGTH_LONG
+                            ).show();
+                }
+                else{
+                    String str = "开始第" + position + "个记录";
+                    Toast.makeText(
+                            getApplicationContext(),
+                            str, 
+                            Toast.LENGTH_LONG
+                            ).show();
+                    
+                    System.out.println("hi--1");
+                    
+                    Intent it = new Intent(MainActivity.this, StartRecord.class);
+                    Bundle bd = new Bundle();
+                    bd.putInt("position", position);
+                    it.putExtras(bd);
+                    startActivity(it);
+                    
+                    System.out.println("hi--2");
+                    
+                }
+                
+            }
+            
+        });
+        // ListView 1 finish.
+        
+        
+        // setting up tab2
+        final Calendar myCalendar = Calendar.getInstance();
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "yyyy/MM/dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CHINA);
+                tab2_textView1.setText(sdf.format(myCalendar.getTime()));
+                }
+        };
+        
+        tab2_button1.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                new DatePickerDialog(MainActivity.this,
+                        date,
+                        myCalendar.get(Calendar.YEAR),
+                        myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)
+                        ).show();
+            }
+        });
+        
+        tab2_button2.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        tab2_textView2.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true).show();
+                
+            }
+        });
+        
+        tab2_button3.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        tab2_textView3.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true).show();
+
+            }
+        });
+        
+        tab2_button4.setOnClickListener(new OnClickListener(){
+            public void onClick(View v) {
+                if (!tab2_editText1.getText().toString().equals("")){
+                    System.out.println(tab2_editText1.getText().toString() + "aaaaaaaaaaaaaaaaaaaaaaaaaa");
+                    
+                    RecordListManager.getInstance(context).addRecord(
+    			            tab2_textView1.getText().toString(),
+    				        tab2_textView2.getText().toString(),
+    					    tab2_textView3.getText().toString(),
+    					    Integer.parseInt(tab2_editText1.getText().toString()));
+    			    refresh_tab1_listView1();
+    			    Toast.makeText(
+                            getApplicationContext(),
+                            "记录已添加", 
+                            Toast.LENGTH_LONG
+                            ).show();
+    			    tabHost.setCurrentTab(0);
+                }
+                else{
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "请输入目标距离", 
+                            Toast.LENGTH_LONG
+                            ).show();
+                }
+            }
+        });
+        // tab2 finish
+
+        
+	}
+    private void refresh_tab1_listView1() {
+        
+        RecordListManager.getInstance(context).updateAllState();
+	    String[] str = RecordListManager.getInstance(context).getStringArray();
+	    if (str == null)
+	    	str = new String[]{};
+	    ArrayAdapter<String> lab1_listView1_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, str);
+            
+	    tab1_listView1.setAdapter(lab1_listView1_adapter);
+	}
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	    // Inflate the menu; this adds items to the action bar if it is present.
+	    getMenuInflater().inflate(R.menu.main, menu);
+	    return true;
+	}
+
+}
