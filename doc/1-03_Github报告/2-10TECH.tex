@@ -1,0 +1,81 @@
+\documentclass [a4paper,11pt]{article}
+\usepackage{booktabs}
+\usepackage{zhfontcfg}
+\usepackage{multirow}
+\usepackage[margin=1in]{geometry}
+
+\linespread{1.5}
+
+
+\title{Github使用报告}
+\date{\today}
+\author{LetsGo安卓应用开发小组}
+
+\begin{document}
+	
+\maketitle
+\section*{修订历史}
+
+\begin{table}[!hbp]
+\centering
+
+\begin{tabular*}{\textwidth}{c|c|c|c}
+\hline
+\rule{0pt}{0.8cm}
+版~本 & 日~期 & 描~述 & 作~者\\
+\hline
+\rule{0pt}{0.6cm}
+初始草案 & 2014年6月1日 & 第一个草案。Github与Git的报告 & 罗宇凡\\
+\hline
+\rule{0pt}{0.6cm}
+ &  &  & \\
+\hline
+\end{tabular*}
+
+\end{table}
+
+\section{概述}
+
+本次project我们全程使用github来同步我们的源代码。这一做法给我们带来很大的便利，尤其是在多人协同编程的情况下，借助于github或类似的分布式版本管理平台会明显提高工作效率，极大降低沟通带来的花费。
+
+\section{Github是什么}
+       要解答“github是什么”这个问题，首先必须了解git。简而言之，git就是一个应用程序，它可以安装于windows，linux等操作系统上，用户可以可以像启动普通软件一样启动它。
+       
+既然git是一个应用程序，那么它肯定有其特定的功能。git的基本功能是：用户可以通过git把自己的本地文件（一般是文本文件，尤其是源代码）上传到“某个地方”，同时用户也可以从“某个地方”把文件下载到本地。“某个地方”可以是任意一台服务器，而github就是这样的一台大型免费服务器。
+       
+       综上所述，编程人士可以在本地安装git，通过git把代码上传到github；也可以通过git从github上下载源代码。这就是github的主要工作方式，同时这也从感性上解释了github是什么。
+
+\section{Git的功能}
+       因为github只是一个存放东西的空间，具体的存取功能都是git实现的，因此我们将重点放在git上。
+  
+\subsection{创建项目}
+       创建git项目相当于建立一个文件夹，这意味着以后该文件夹下的所有东西都会在本地和服务器两端进行同步。但是这并不是说我在本地随便创建一个新文件夹，就算成功创建一个git项目了。创建git项目通常有两种途径，且这两种途径都要借助于github网页：
+        1，可以在github个人主页上新建一个repository（网页中有专门执行该操作的按钮），这样就成功新建一个git项目了，用户可以在本地建立一个同名文件夹，并与github同步。
+        2，可以在github上fork别人的项目（网页上有专门执行该操作的按钮），这样就可以将别人的项目克隆为自己的项目，用户可以在本地建立一个同名文件夹，并与github同步。
+
+\subsection{上传}
+       要将本地的文件上传到github，首先需要将需要用add命令添加待上传的文件（方便起见一般都用git add . ，意思是添加所有文件），接着用git commit命令确认修改，最后就可以通过git push [source] [branch]命令上传到github了。
+
+\subsection{下载}
+       要将github上的文件下载到本地，有两种常用方法：
+       1，git pull [source] [branch]，将source指定目录里branch指定分支下的所有文件下载到本地，并自动和本地当前分支进行合并。
+       2，git fetch [source] [branch]，将source指定目录里branch指定分支下的所有文件下载到本次并自动添加到本地source/branch分支中。即该方法下载的文件不会自动与本地当前分支合并，需要之后手动合并。
+
+\section{Git的使用心得}
+      到目前为止，本文都在不厌其烦地强调git的上传下载功能。但如果仅此而已，git就和普通网盘没多大区别了。而且，用网盘共享资源似乎并不会给多人协作编程带来多大的便利。因此，下面本文将介绍我们团队在使用github时印象最深的几点，供大家参考。
+  
+\subsection{分支}
+git可以为一个项目同时保存多个版本，每个版本就成为一个分支。这个特性很好地适应了多人同时开发同一个项目地情景。假设在某个时间点，每个人所看看到的项目工程代码都是相同的，接着每个人都在相同源代码的基础上各自开发自己负责的部分。这时可以通过git为每个人创建一个分支。假设存在分支A和分支B，使用git checkout [branch]命令可以自由在A和B之间“移动”，并且对于同一个文件C，在分支A看到的内容和在分支B，看到的内容可能是不同的！这就保证了团队的每个人可以互不干扰，独立开发。
+\subsection{合并}
+一个项目发行时显然只能有一种版本，因此各个分支最终都避免不了合并的命运。如果要人工合并两个修改得面目全非的文件，绝对是吃力不讨好的工作，但git为我们提供了强大的合并功能！合并（merge）功能也是笔者认为的git最重要的功能！
+用户可以通过git merge [branch]命令来将branch分支和当前分支进行合并。对于相同的一个文件，如果当前分支该文件的内容与branch分支不同的话，git会提示merge conflict，并会在该文件中用“> > > > > > >head”，“=========="，“< < < < < < < < <source”来清楚地标定出不同指出。因此我们只需人工处理这些有conflict的地方，并重新保存文件，就可以轻松完成合并了。
+
+\end{document}
+
+
+
+
+
+
+
+
